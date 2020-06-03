@@ -2022,11 +2022,13 @@ void R_CreatePipelines()
 	compute_pipeline_create_info.layout = vulkan_globals.screen_warp_pipeline_layout;
 
 	assert(vulkan_globals.screen_warp_pipeline == VK_NULL_HANDLE);
+#if 0
 	err = vkCreateComputePipelines(vulkan_globals.device, VK_NULL_HANDLE, 1, &compute_pipeline_create_info, NULL, &vulkan_globals.screen_warp_pipeline);
 	if (err != VK_SUCCESS)
 		Sys_Error("vkCreateGraphicsPipelines failed");
 
 	GL_SetObjectName((uint64_t)vulkan_globals.raster_tex_warp_pipeline, VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT, "screen_warp");
+#endif
 
 	//================
 	// Texture Warp
@@ -2043,11 +2045,13 @@ void R_CreatePipelines()
 	compute_pipeline_create_info.layout = vulkan_globals.cs_tex_warp_pipeline_layout;
 
 	assert(vulkan_globals.cs_tex_warp_pipeline == VK_NULL_HANDLE);
+#if 0
 	err = vkCreateComputePipelines(vulkan_globals.device, VK_NULL_HANDLE, 1, &compute_pipeline_create_info, NULL, &vulkan_globals.cs_tex_warp_pipeline);
 	if (err != VK_SUCCESS)
 		Sys_Error("vkCreateGraphicsPipelines failed");
 
 	GL_SetObjectName((uint64_t)vulkan_globals.raster_tex_warp_pipeline, VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT, "screen_warp");
+#endif
 
 	vkDestroyShaderModule(vulkan_globals.device, showtris_frag_module, NULL);
 	vkDestroyShaderModule(vulkan_globals.device, showtris_vert_module, NULL);
@@ -2116,9 +2120,13 @@ void R_DestroyPipelines(void)
 	vulkan_globals.alias_blend_pipeline = VK_NULL_HANDLE;
 	vkDestroyPipeline(vulkan_globals.device, vulkan_globals.postprocess_pipeline, NULL);
 	vulkan_globals.postprocess_pipeline = VK_NULL_HANDLE;
+#if 0
 	vkDestroyPipeline(vulkan_globals.device, vulkan_globals.screen_warp_pipeline, NULL);
+#endif
 	vulkan_globals.screen_warp_pipeline = VK_NULL_HANDLE;
+#if 0
 	vkDestroyPipeline(vulkan_globals.device, vulkan_globals.cs_tex_warp_pipeline, NULL);
+#endif
 	vulkan_globals.cs_tex_warp_pipeline = VK_NULL_HANDLE;
 	if (vulkan_globals.showtris_pipeline != VK_NULL_HANDLE)
 	{

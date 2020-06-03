@@ -362,6 +362,7 @@ void R_SetupView (void)
 	r_fovy = r_refdef.fov_y;
 	render_warp = false;
 
+#if 0
 	if (r_waterwarp.value)
 	{
 		int contents = Mod_PointInLeaf (r_origin, cl.worldmodel)->contents;
@@ -377,6 +378,7 @@ void R_SetupView (void)
 			}
 		}
 	}
+#endif
 	//johnfitz
 
 	R_SetFrustum (r_fovx, r_fovy); //johnfitz -- use r_fov* vars

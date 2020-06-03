@@ -949,6 +949,7 @@ qboolean GL_Set2D (void)
 
 	if (render_warp)
 	{
+#if 0
 		VkImageMemoryBarrier image_barriers[2];
 		image_barriers[0].sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
 		image_barriers[0].pNext = NULL;
@@ -1006,6 +1007,7 @@ qboolean GL_Set2D (void)
 		image_barriers[0].subresourceRange.layerCount = 1;
 
 		vkCmdPipelineBarrier(vulkan_globals.command_buffer, VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, 0, 0, NULL, 0, NULL, 1, image_barriers);
+#endif
 	}
 	else
 	{
