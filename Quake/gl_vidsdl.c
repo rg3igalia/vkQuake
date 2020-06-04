@@ -1600,6 +1600,12 @@ static qboolean GL_CreateSwapChain( void )
 			Sys_Error("Couldn't get surface capabilities");
 	}
 
+	if (vulkan_surface_capabilities.minImageCount > MAX_SWAP_CHAIN_IMAGES)
+		Sys_Error("Unsupported minimum number of swap chain images");
+
+	if (vulkan_surface_capabilities.maxImageCount == 1)
+		Sys_Error("Unsupported maximum number of swap chain images");
+
 	if ((vulkan_surface_capabilities.currentExtent.width != 0xFFFFFFFF || vulkan_surface_capabilities.currentExtent.width != 0xFFFFFFFF)
 		&& (vulkan_surface_capabilities.currentExtent.width != vid.width || vulkan_surface_capabilities.currentExtent.height != vid.height)) {
 		return false;
@@ -1690,7 +1696,7 @@ static qboolean GL_CreateSwapChain( void )
 	swapchain_create_info.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
 	swapchain_create_info.pNext = NULL;
 	swapchain_create_info.surface = vulkan_surface;
-	swapchain_create_info.minImageCount = 2;
+	swapchain_create_info.minImageCount = ((vulkan_surface_capabilities.minImageCount > 2) ? vulkan_surface_capabilities.minImageCount : 2);
 	swapchain_create_info.imageFormat = swap_chain_format;
 	swapchain_create_info.imageColorSpace = swap_chain_color_space;
 	swapchain_create_info.imageExtent.width = vid.width;
